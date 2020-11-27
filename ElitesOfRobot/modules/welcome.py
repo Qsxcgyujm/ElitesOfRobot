@@ -63,13 +63,6 @@ ENUM_FUNC_MAP = {
 VERIFIED_USER_WAITLIST = {}
 
 
-DEV_IMG = "https://telegra.ph/file/81f446d0526c62b397d7d.jpg"
-DIVU_IMG = "https://telegra.ph/file/3dabdbfb5180a208feae6.jpg"
-DIVU = ['CAACAgUAAxkBAAEGxYpfrAJTmVg8SZFwJn9NJYeKsrfyRAACggEAAvAi8zVpPtqDWNAO6h4E', 'CAACAgUAAxkBAAEGxYxfrAJUCrZffZlM5pm-A8kch5R9OQACgwEAAvAi8zWzjD0gMCyp-h4E', 'CAACAgUAAxkBAAEGxZJfrAJ6lmG6szkAAaGB58DS-JZQNZcAAoUBAALwIvM1FZYQxi8MqboeBA', 'CAACAgUAAxkBAAEGxZRfrAJ8hJ-uZcskQ3AZfspPOiTQlwAChgEAAvAi8zWSHOxPXqZa5R4E', 'CAACAgUAAxkBAAEGyMJfrR8UK8_OBXEGR0v_kMRR4BVApwAChwEAAvAi8zXXhRmOP05gIh4E']                                         
-DEV = ['CAACAgEAAxkBAAEGxZxfrARjP5byUM1mBziCl2nh-3reigACqAADc1ZBR00bXYkCsdj9HgQ', 'CAACAgEAAxkBAAEGxZpfrARdDg-JdeLqO_zi42Lnt8kyDQAC_QADnq5IR6juKE-rtZ3UHgQ', 'CAACAgEAAxkBAAEGxZhfrARaG0PGsG6GxnGirALzIxQ-YQACqQADBQtIR7H-RTJNySW4HgQ']
-
-
-
 
 # do not async
 def send(update, message, keyboard, backup_message):
@@ -176,17 +169,15 @@ def new_member(update: Update, context: CallbackContext):
                     pass
                 reply = False
 
-            #Welcome Divu
-            if new_mem.id == 905126640:
-              update.effective_message.reply_photo(DIVU_IMG, "Bip Bop Bip Bop....🎉 \n\nMy Boss 𝐋 Is Joined Your Chat!", parse_mode=ParseMode.HTML, reply_to_message_id=reply, disable_web_page_preview=True)
-              bot.send_sticker(chat.id, (random.choice(DIVU)))
+            #Welcome Owner
+            if new_mem.id == OWNER_ID:
+              update.effective_message.reply_text("My Master Is Just Joined Your Chat.")
               continue
 
 
             #welocome dev
-            elif new_mem.id == 1306543333:
-              update.effective_message.reply_photo(DEV_IMG, "*Bip Bip Bip* \n\nMy Master Is Just Joined!", parse_mode=ParseMode.HTML, reply_to_message_id=reply, disable_web_page_preview=True)
-              bot.send_sticker(chat.id, (random.choice(DEV)))
+            elif new_mem.id in DEV_USERS:
+              update.effective_message.reply_text("My Dev User Just Joined Your Chat.")
               continue
 
             
@@ -210,8 +201,7 @@ def new_member(update: Update, context: CallbackContext):
                         "#NEW_GROUP\n\n<b>Group Name :</b> {}\n\n<b>Chat ID :</b> <code>{}</code> \n\n<b>Adder :</b> <code>{}</code>"
                         .format(chat.title, chat.id, user.id),
                         parse_mode=ParseMode.HTML)
-                update.effective_message.reply_text("Hey, <b>{}</b>\nI'm <b>{}!</b> Thanks For Adding Me To <b>{}</b>\n" 
-                "Be Sure To Check - /help In PM For More Cmd And Tricks!😉\nTo Know About Us - /familylist".format(user.first_name, bot.first_name, chat.title), parse_mode=ParseMode.HTML)
+                update.effective_message.reply_text("Hey There, \nI'm <b>{}!</b> Thank You For Adding Me To <b>{}</b>\n".format(bot.first_name, chat.title), parse_mode=ParseMode.HTML)
                 continue
 
             else:
@@ -453,15 +443,15 @@ def left_member(update: Update, context: CallbackContext):
                 return
 
             # Give the owner a special goodbye
-            if left_mem.id == 1306543333:
+            if left_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
-                    "GOODBYE MASTER!, SEE YOU LATER AT HQ.", reply_to_message_id=reply)
+                    "GOODBYE MASTER! SEE YOU LATER.", reply_to_message_id=reply)
                 return
 
-            # Give the divu a special goodbye
-            elif left_mem.id == 905126640:
+            # Give the dev users a special goodbye
+            elif left_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "See You Later At The HQ!",
+                    "Ohh.. He Left.",
                     reply_to_message_id=reply,
                 )
                 return
