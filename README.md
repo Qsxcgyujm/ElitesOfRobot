@@ -17,5 +17,4 @@ If you find a bug, don't be afraid to report it in our Telegram group or open an
 
 ## Credits
 [@AmTanny](https://github.com/gizmostuffin/Shoko)
-[@MeAnii](https://github.com/AmTanny/allukabot)
 [@AnimeKaizoku](https://github.com/AnimeKaizoku/SaitamaRobot)
